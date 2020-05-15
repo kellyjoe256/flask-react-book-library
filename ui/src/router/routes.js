@@ -9,22 +9,34 @@ export default [
         exact: true,
         title: 'Book Library',
         component: Index,
+        meta: {
+            guest: true,
+        },
     },
     {
         path: '/login',
         title: 'Login',
         component: Login,
+        meta: {
+            guest: true,
+        },
     },
     {
         path: '/login',
         title: 'Login',
         component: Login,
+        meta: {
+            guest: true,
+        },
     },
     {
         path: '/admin',
         title: 'Dashboard',
         exact: true,
         component: Dashboard,
+        meta: {
+            auth: true,
+        },
     },
     {
         path: '/not-found',

@@ -1,1 +1,6 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~react-toastify/dist/ReactToastify.css';
+
+#wrapper {
+    padding-top: 1.5em;
+}
