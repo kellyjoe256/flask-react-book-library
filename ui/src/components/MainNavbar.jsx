@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import _ from 'lodash';
-import { logout } from '../store/modules/auth';
+import { logout, selectUser } from '../store/modules/auth';
 
-const MainNavbar = (props) => {
+const MainNavbar = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const { user } = props;
+    const user = useSelector(selectUser);
 
     return (
         <Navbar bg="light" variant="light">
@@ -21,6 +21,14 @@ const MainNavbar = (props) => {
                 <Nav className="ml-auto">
                     {user && (
                         <>
+                            <Nav>
+                                <NavLink
+                                    className="nav-link"
+                                    to="/admin/categories"
+                                >
+                                    Categories
+                                </NavLink>
+                            </Nav>
                             <NavDropdown
                                 title={_.startCase(user.username)}
                                 id="nav-dropdown"

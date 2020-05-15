@@ -5,9 +5,7 @@ import { Redirect, Switch } from 'react-router-dom';
 import routes from './routes';
 import CustomRoute from '../components/common/CustomRoute';
 
-const Routes = (props) => {
-    const { user } = props;
-
+const Routes = () => {
     return (
         <Switch>
             {routes.map((route) => {
@@ -19,7 +17,6 @@ const Routes = (props) => {
                         path={path}
                         exact={exact}
                         meta={meta}
-                        user={user}
                         title={title}
                         component={component}
                     />

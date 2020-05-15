@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
-import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { Route } from 'react-router-dom';
 import AdminRoute from './AdminRoute';
 import GuestRoute from './GuestRoute';
 import ProtectedRoute from './ProtectedRoute';
+import { selectUser } from '../../store/modules/auth';
 
 const CustomRoute = (props) => {
-    const { title, meta, user, ...rest } = props;
+    const { title, meta, ...rest } = props;
+    const user = useSelector(selectUser);
 
     useEffect(() => {
         document.title = title;

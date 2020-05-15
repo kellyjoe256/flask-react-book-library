@@ -3,6 +3,11 @@ import Login from '../components/Login';
 import NotFound from '../components/NotFound';
 import Dashboard from '../components/admin/Dashboard';
 
+// /admin/categories
+import CategoriesIndex from '../components/admin/categories/Index';
+import CategoriesAdd from '../components/admin/categories/Add';
+import CategoriesEdit from '../components/admin/categories/Edit';
+
 export default [
     {
         path: '/',
@@ -34,6 +39,31 @@ export default [
         title: 'Dashboard',
         exact: true,
         component: Dashboard,
+        meta: {
+            auth: true,
+        },
+    },
+    // /admin/categories
+    {
+        path: '/admin/categories/:id/edit',
+        title: 'Edit Category',
+        component: CategoriesEdit,
+        meta: {
+            auth: true,
+        },
+    },
+    {
+        path: '/admin/categories/add',
+        title: 'Add Category',
+        component: CategoriesAdd,
+        meta: {
+            auth: true,
+        },
+    },
+    {
+        path: '/admin/categories',
+        title: 'Categories',
+        component: CategoriesIndex,
         meta: {
             auth: true,
         },

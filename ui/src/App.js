@@ -1,30 +1,50 @@
 // @ts-nocheck
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Container } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastify';
-import { useDispatch, useSelector } from 'react-redux';
-
 import Routes from './router';
-import { authenticate, selectUser } from './store/modules/auth';
+import { authenticate } from './store/modules/auth';
 import MainNavbar from './components/MainNavbar';
 
-function App() {
-    const dispatch = useDispatch();
-    const user = useSelector(selectUser);
+class App extends Component {
+    state = {
+        show: false,
+    };
 
-    if (!user) {
-        dispatch(authenticate());
+    componentDidMount() {
+        const { authenticate } = this.props;
+
+        authenticate()
+            .then(() => this.setState({ show: true }))
+            .catch((error) => {
+                this.setState({ show: true });
+
+                console.log(error);
+            });
     }
 
-    return (
-        <>
-            <ToastContainer position="top-center" autoClose={5000} />
-            <MainNavbar user={user} />
-            <Container id="wrapper">
-                <Routes user={user} />
-            </Container>
-        </>
-    );
+    render() {
+        const { show } = this.state;
+
+        return (
+            <>
+                {!show && null}
+                {show && (
+                    <>
+                        <ToastContainer
+                            position="top-center"
+                            autoClose={5000}
+                        />
+                        <MainNavbar />
+                        <Container id="wrapper">
+                            <Routes />
+                        </Container>
+                    </>
+                )}
+            </>
+        );
+    }
 }
 
-export default App;
+export default connect(null, { authenticate })(App);

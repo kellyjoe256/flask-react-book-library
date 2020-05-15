@@ -1,5 +1,6 @@
 // @ts-nocheck
 import axios from 'axios';
+import _ from 'lodash';
 import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
@@ -9,9 +10,16 @@ axios.interceptors.response.use(null, (error) => {
     const { response } = error;
     const { status: statusCode } = response;
 
+    let message = null;
     if (statusCode >= 400 && statusCode < 500) {
         const { data } = response;
-        let message = data.error || data.message;
+        if (data.error || data.message) {
+            message = data.message || data.error;
+        }
+
+        if (!message) {
+            message = response.statusText;
+        }
 
         // eslint-disable-next-line arrow-body-style
         const tokenExpired = ['token', 'expired'].every((w) => {
@@ -25,9 +33,11 @@ axios.interceptors.response.use(null, (error) => {
         if (tokenExpired || missingCookie) {
             message = 'Session expired';
         }
-
-        toast.error(message);
+    } else {
+        message = 'An unexpected error occurred';
     }
+
+    toast.error(_.capitalize(message));
 
     return Promise.reject(response);
 });

@@ -26,7 +26,10 @@ class Form extends Component {
         const errors = {};
         const { form } = this.state;
 
-        const { error } = this.schema.validate(form, { abortEarly: false });
+        const { error } = this.schema.validate(form, {
+            abortEarly: false,
+            allowUnknown: true,
+        });
         if (!error) {
             return null;
         }

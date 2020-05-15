@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 
 const GuestRoute = (props) => {
-    const { user } = props;
+    const { user, ...rest } = props;
 
     if (user) {
         return <Redirect to="/admin" />;
     }
 
-    return <Route {...props} />;
+    return <Route {...rest} />;
 };
 
 GuestRoute.propTypes = {

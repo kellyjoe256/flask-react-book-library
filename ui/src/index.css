@@ -4,3 +4,20 @@
 #wrapper {
     padding-top: 1.5em;
 }
+
+.table td,
+.table th {
+    padding: 0.45rem;
+}
+
+.table a {
+    display: inline-block;
+}
+
+.table a:first-child {
+    margin-right: 5px;
+}
+
+.table a:last-child {
+    margin-left: 5px;
+}
