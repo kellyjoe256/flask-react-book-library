@@ -8,7 +8,7 @@ from app.models import User
 
 
 class LoginAPI(Resource):
-    parser = reqparse.RequestParser()
+    parser = reqparse.RequestParser(bundle_errors=True)
     parser.add_argument('username', required=True, trim=True,
                         help='Username is required')
     parser.add_argument('password', required=True,
@@ -20,7 +20,7 @@ class LoginAPI(Resource):
 
         user = User.query.filter(User.username == username).first()
         if not (user and user.verify_password(data.get('password'))):
-            return {'message': 'Invalid credentials'}, 401
+            return {'message': 'Username or Password incorrect'}, 401
 
         access_token = create_access_token(identity=user)
         response = make_response(jsonify(user.json()))

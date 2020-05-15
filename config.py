@@ -43,9 +43,9 @@ class ProductionConfig(Config):
 
     ENV = 'production'
     DEBUG = False
+    JWT_COOKIE_SECURE = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'db.sqlite')
-    JWT_COOKIE_SECURE = True
 
 
 config = {
