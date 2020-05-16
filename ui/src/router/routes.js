@@ -8,6 +8,11 @@ import CategoriesIndex from '../components/admin/categories/Index';
 import CategoriesAdd from '../components/admin/categories/Add';
 import CategoriesEdit from '../components/admin/categories/Edit';
 
+// /admin/authors
+import AuthorsIndex from '../components/admin/authors/Index';
+import AuthorsAdd from '../components/admin/authors/Add';
+import AuthorsEdit from '../components/admin/authors/Edit';
+
 export default [
     {
         path: '/',
@@ -64,6 +69,31 @@ export default [
         path: '/admin/categories',
         title: 'Categories',
         component: CategoriesIndex,
+        meta: {
+            auth: true,
+        },
+    },
+    // /admin/authors
+    {
+        path: '/admin/authors/:id/edit',
+        title: 'Edit Author',
+        component: AuthorsEdit,
+        meta: {
+            auth: true,
+        },
+    },
+    {
+        path: '/admin/authors/add',
+        title: 'Add Author',
+        component: AuthorsAdd,
+        meta: {
+            auth: true,
+        },
+    },
+    {
+        path: '/admin/authors',
+        title: 'Authors',
+        component: AuthorsIndex,
         meta: {
             auth: true,
         },

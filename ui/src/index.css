@@ -21,3 +21,12 @@
 .table a:last-child {
     margin-left: 5px;
 }
+
+.sm-8 {
+    font-size: 80%;
+}
+
+.invalid {
+    color: #dc3545;
+    margin-bottom: 0.5rem;
+}

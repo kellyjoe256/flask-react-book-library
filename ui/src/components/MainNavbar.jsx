@@ -28,6 +28,12 @@ const MainNavbar = () => {
                                 >
                                     Categories
                                 </NavLink>
+                                <NavLink
+                                    className="nav-link"
+                                    to="/admin/authors"
+                                >
+                                    Authors
+                                </NavLink>
                             </Nav>
                             <NavDropdown
                                 title={_.startCase(user.username)}

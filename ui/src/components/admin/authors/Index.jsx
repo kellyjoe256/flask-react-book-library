@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Table, Row, Col } from 'react-bootstrap';
-import {
-    getCategories,
-    deleteCategory,
-} from '../../../store/modules/categories';
+import { getAuthors, deleteAuthor } from '../../../store/modules/authors';
 import Limiter from '../../common/Limiter';
 import Paginator from '../../common/Paginator';
 
@@ -23,24 +20,24 @@ class Index extends Component {
     }
 
     componentDidMount() {
-        const { getCategories } = this.props;
+        const { getAuthors } = this.props;
 
-        getCategories();
+        getAuthors();
     }
 
     onLimitChange(limit) {
-        const { getCategories } = this.props;
+        const { getAuthors } = this.props;
 
         this.setState({ limit });
 
-        getCategories(`page=1&limit=${limit}`);
+        getAuthors(`page=1&limit=${limit}`);
     }
 
     onPageChange(page) {
-        const { getCategories } = this.props;
+        const { getAuthors } = this.props;
         const { limit } = this.state;
 
-        getCategories(`page=${page}&limit=${limit}`);
+        getAuthors(`page=${page}&limit=${limit}`);
     }
 
     delete(id) {
@@ -49,45 +46,49 @@ class Index extends Component {
             return;
         }
 
-        const { getCategories, deleteCategory } = this.props;
+        const { getAuthors, deleteAuthor } = this.props;
 
-        deleteCategory(id)
+        deleteAuthor(id)
             .then(() => {
-                toast.success('Category deleted successfully');
-                getCategories();
+                toast.success('Author deleted successfully');
+                getAuthors();
             })
             .catch(console.log);
     }
 
-    showCategories() {
-        const { categories } = this.props;
+    showAuthors() {
+        const { authors } = this.props;
 
         return (
             <Table responsive striped>
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {categories.map((category) => (
-                        <tr key={category.id}>
-                            <td>{category.name}</td>
+                    {authors.map((author) => (
+                        <tr key={author.id}>
+                            <td>{author.first_name}</td>
+                            <td>{author.last_name}</td>
+                            <td>{author.gender === 'M' ? 'Male' : 'Female'}</td>
                             <td>
                                 <Link
-                                    to={`/admin/categories/${category.id}/edit`}
+                                    to={`/admin/authors/${author.id}/edit`}
                                     className="text-info"
                                 >
                                     Edit
                                 </Link>
                                 <a
-                                    href={`#${category.id}`}
+                                    href={`#${author.id}`}
                                     className="text-danger"
                                     onClick={(e) => {
                                         e.preventDefault();
 
-                                        this.delete(category.id);
+                                        this.delete(author.id);
                                     }}
                                 >
                                     Delete
@@ -101,7 +102,7 @@ class Index extends Component {
     }
 
     render() {
-        const { categories, pagination } = this.props;
+        const { authors, pagination } = this.props;
 
         return (
             <>
@@ -113,15 +114,15 @@ class Index extends Component {
                             </Col>
                             <Col className="text-right">
                                 <Link
-                                    to="/admin/categories/add"
+                                    to="/admin/authors/add"
                                     className="btn btn-outline-secondary"
                                 >
-                                    Add Category
+                                    Add Author
                                 </Link>
                             </Col>
                         </Row>
-                        {!categories.length && <h1>No categories found</h1>}
-                        {categories.length && this.showCategories()}
+                        {!authors.length && <h1>No authors found</h1>}
+                        {authors.length && this.showAuthors()}
                         {pagination && (
                             <Paginator
                                 current_page={pagination.meta.current_page}
@@ -137,10 +138,8 @@ class Index extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    categories: state.categories.items,
-    pagination: state.categories.pagination,
+    authors: state.authors.items,
+    pagination: state.authors.pagination,
 });
 
-export default connect(mapStateToProps, { getCategories, deleteCategory })(
-    Index
-);
+export default connect(mapStateToProps, { getAuthors, deleteAuthor })(Index);
