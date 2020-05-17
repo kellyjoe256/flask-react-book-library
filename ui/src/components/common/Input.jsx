@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import _ from 'lodash';
 
 const Input = (props) => {
-    const { name, value, label, error, onChange, ...rest } = props;
+    const { name, value, label, error, tip, onChange, ...rest } = props;
 
     return (
         <>
@@ -18,6 +18,7 @@ const Input = (props) => {
                     isInvalid={Boolean(error)}
                     {...rest}
                 />
+                {tip && <Form.Text className="text-muted">{tip}</Form.Text>}
                 {Boolean(error) && (
                     <Form.Control.Feedback type="invalid">
                         {error}

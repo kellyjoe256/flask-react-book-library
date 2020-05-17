@@ -18,6 +18,11 @@ import BooksIndex from '../components/admin/books/Index';
 import BooksAdd from '../components/admin/books/Add';
 import BooksEdit from '../components/admin/books/Edit';
 
+// /admin/users
+import UsersIndex from '../components/admin/users/Index';
+import UsersAdd from '../components/admin/users/Add';
+import UsersEdit from '../components/admin/users/Edit';
+
 export default [
     {
         path: '/',
@@ -126,6 +131,34 @@ export default [
         component: BooksIndex,
         meta: {
             auth: true,
+        },
+    },
+    // /admin/users
+    {
+        path: '/admin/users/:id/edit',
+        title: 'Edit User',
+        component: UsersEdit,
+        meta: {
+            auth: true,
+            admin: true,
+        },
+    },
+    {
+        path: '/admin/users/add',
+        title: 'Add User',
+        component: UsersAdd,
+        meta: {
+            auth: true,
+            admin: true,
+        },
+    },
+    {
+        path: '/admin/users',
+        title: 'Users',
+        component: UsersIndex,
+        meta: {
+            auth: true,
+            admin: true,
         },
     },
     {

@@ -37,6 +37,14 @@ const MainNavbar = () => {
                                 <NavLink className="nav-link" to="/admin/books">
                                     Books
                                 </NavLink>
+                                {user.is_admin && (
+                                    <NavLink
+                                        className="nav-link"
+                                        to="/admin/users"
+                                    >
+                                        Users
+                                    </NavLink>
+                                )}
                             </Nav>
                             <NavDropdown
                                 title={_.startCase(user.username)}
