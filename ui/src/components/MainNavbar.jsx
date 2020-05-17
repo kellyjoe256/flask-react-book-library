@@ -34,6 +34,9 @@ const MainNavbar = () => {
                                 >
                                     Authors
                                 </NavLink>
+                                <NavLink className="nav-link" to="/admin/books">
+                                    Books
+                                </NavLink>
                             </Nav>
                             <NavDropdown
                                 title={_.startCase(user.username)}

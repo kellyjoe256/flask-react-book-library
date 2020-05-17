@@ -32,7 +32,7 @@ Input.propTypes = {
     name: PropTypes.string.isRequired,
     error: PropTypes.string,
     label: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func.isRequired,
 };
 

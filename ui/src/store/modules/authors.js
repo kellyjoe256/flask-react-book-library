@@ -38,7 +38,9 @@ export const getAuthors = (query_string = '') => async (dispatch) => {
     try {
         const { data } = await http.get(url);
 
-        dispatch(SET_AUTHORS(data));
+        if (!url.includes('all')) {
+            dispatch(SET_AUTHORS(data));
+        }
 
         return Promise.resolve(data);
     } catch (error) {
@@ -56,7 +58,7 @@ export const saveAuthor = (payload) => async (dispatch) => {
         },
     };
 
-    const fields = ['id', 'first_name', 'last_name', 'gender', 'about'];
+    const fields = ['first_name', 'last_name', 'gender', 'about'];
     try {
         const { data } = await http.wrapper({
             url,
