@@ -1,6 +1,7 @@
 import Index from '../components/Index';
 import Login from '../components/Login';
 import NotFound from '../components/NotFound';
+import BookDetails from '../components/BookDetails';
 import Dashboard from '../components/admin/Dashboard';
 
 // /admin/categories
@@ -29,6 +30,14 @@ export default [
         exact: true,
         title: 'Book Library',
         component: Index,
+        meta: {
+            guest: true,
+        },
+    },
+    {
+        path: '/:id/book_details',
+        title: 'Book Details',
+        component: BookDetails,
         meta: {
             guest: true,
         },

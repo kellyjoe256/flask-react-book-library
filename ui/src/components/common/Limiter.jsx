@@ -10,6 +10,10 @@ const Limiter = (props) => {
             as="select"
             name="limit"
             className="w-25"
+            style={{
+                display: 'inline-block',
+                marginRight: '0.6rem',
+            }}
             onChange={(e) => {
                 const { target } = e;
 
