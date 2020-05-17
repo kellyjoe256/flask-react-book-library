@@ -47,7 +47,7 @@ $ cd ui
 $ npm install
 
 # run and test in the browser
-$ npm run start # http://localhost:8080
+$ npm run start # http://localhost:3000
 ```
 
 #### Demo
